@@ -1,14 +1,14 @@
 <template>
   <div>
     <i-layout>
-      <i-breadcrumb :t2="breadcrumbTitle">
+      <i-breadcrumb :t3="breadcrumbTitle">
         <Button class="fr vue-back-btn" @click="$router.go(-1)" shape="circle">返回</Button>
       </i-breadcrumb>
       <div class="vue-panel-desc">
         <Row type="flex" justify="center">
           <Col span="12" :md="14" :lg="12" :xs="24" :sm="24">
           <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-            <FormItem label="用户名:" prop="userCode">
+            <FormItem label="病患名稱:" prop="userCode">
               <Input v-if="!$route.query.userCode" v-model="formValidate.userCode" placeholder="请输入用户名"></Input>
               <label v-if="$route.query.userCode">{{formValidate.userCode}}</label>
             </FormItem>

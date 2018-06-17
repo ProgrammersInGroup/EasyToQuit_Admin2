@@ -7,47 +7,46 @@
       <Form :model="formItem" :label-width="80">
         <Row>
           <Col :xs="24" :sm="24" :md="8" :lg="8">
-          <FormItem label="创建日期:">
-            <DatePicker style="width:100%" v-model="formItem.createTime" format="yyyy-MM-dd" type="daterange" placement="bottom-start" placeholder="请选择日期"></DatePicker>
+          <FormItem label="發布日期:">
+            <DatePicker style="width:100%" v-model="formItem.createTime" format="yyyy-MM-dd" type="daterange" placement="bottom-start" placeholder="請選擇日期"></DatePicker>
           </FormItem>
           </Col>
           <Col :xs="24" :sm="24" :md="8" :lg="8">
-          <FormItem label="文章标题:">
-            <Input v-model="formItem.articleTitle" placeholder="请输入文章标题" clearable></Input>
+          <FormItem label="文章標題:">
+            <Input v-model="formItem.articleTitle" placeholder="請輸入文章標題" clearable></Input>
           </FormItem>
           </Col>
           <Col :xs="24" :sm="24" :md="8" :lg="8">
           <FormItem label="文章作者:">
             <Select v-model="formItem.userCode">
-              <Option value="USER">普通用户</Option>
-              <Option value="ADMIN">管理员</Option>
+              <Option value="USER">個管師</Option>
             </Select>
           </FormItem>
           </Col>
           <Col :xs="24" :sm="24" :md="8" :lg="8">
-          <FormItem label="文章分类:">
+          <FormItem label="文章分類:">
             <Select v-model="formItem.category">
-              <Option value="USER">普通用户</Option>
-              <Option value="ADMIN">管理员</Option>
+              <Option value="USER">戒菸</Option>
+              <Option value="ADMIN">健康</Option>
             </Select>
           </FormItem>
           </Col>
           <Col :xs="24" :sm="24" :md="8" :lg="8">
-          <FormItem label="文章状态:">
+          <FormItem label="文章狀態:">
             <Select v-model="formItem.status">
-              <Option value="100">已发布</Option>
-              <Option value="500">未发布</Option>
+              <Option value="100">已發佈</Option>
+              <Option value="500">未發佈</Option>
             </Select>
           </FormItem>
           </Col>
           <Col :xs="24" :sm="24" :md="8" :lg="8">
           <FormItem label="文章摘要:">
-            <Input v-model="formItem.abstract" placeholder="请输入文章摘要" clearable></Input>
+            <Input v-model="formItem.abstract" placeholder="請輸入文章摘要" clearable></Input>
           </FormItem>
           </Col>
         </Row>
         <FormItem>
-          <Button type="primary" @click="getList" style="width:80px" long shape="circle">查询</Button>
+          <Button type="primary" @click="getList" style="width:80px" long shape="circle">查詢</Button>
           <Button type="ghost" style="width:80px;margin-left: 8px" @click="clearForm" shape="circle">清除</Button>
         </FormItem>
       </Form>
@@ -109,13 +108,13 @@ export default {
       tableData1: [],
       tableColumns1: [
         {
-          title: "序号",
+          title: "編號",
           type: "index",
           width: 60,
           align: "center"
         },
         {
-          title: "创建日期",
+          title: "發布日期",
           width: 150,
           key: "createTime",
           render: (h, params) => {
@@ -127,8 +126,9 @@ export default {
           }
         },
         {
-          title: "文章标题",
-          key: "articleTitle"
+          title: "文章標題",
+          key: "articleTitle",
+          width: 200
         },
         {
           title: "作者",
@@ -137,39 +137,10 @@ export default {
         {
           title: "文章摘要",
           key: "abstract",
-          width: 200
+          width: 130
         },
         {
-          title: "文章分类",
-          width: 200,
-          key: "category",
-          render: (h, params) => {
-            const row = params.row;
-            let a = [];
-            let color = ["blue", "green", "red", "yellow"];
-            let j = 0;
-            for (let i = 0; i < params.row.category.length; i++) {
-              j++;
-              a.push(
-                h(
-                  "Tag",
-                  {
-                    props: {
-                      color: color[j]
-                    }
-                  },
-                  params.row.category[i]
-                )
-              );
-              if (j === 4) {
-                j = 0;
-              }
-            }
-            return a;
-          }
-        },
-        {
-          title: "文章状态",
+          title: "文章狀態",
           key: "status",
           render: (h, params) => {
             const row = params.row;
@@ -185,7 +156,7 @@ export default {
                     color: "green"
                   }
                 },
-                status
+                "已發佈"
               );
             } else if (row.status === "500") {
               return h(
@@ -196,7 +167,7 @@ export default {
                     type: "border"
                   }
                 },
-                status
+                "草稿"
               );
             }
           }
@@ -241,12 +212,12 @@ export default {
                         id: params.row._id,
                         modalType: "delete",
                         modalTitle: "提示",
-                        modalContent: "此操作将永久删除该文章, 是否继续?"
+                        modalContent: "將永遠刪除文章，確定嗎？"
                       });
                     }
                   }
                 },
-                "删除"
+                "刪除"
               ),
               h(
                 "Button",
@@ -261,7 +232,7 @@ export default {
                     }
                   }
                 },
-                "详情"
+                "更多"
               )
             ]);
           }

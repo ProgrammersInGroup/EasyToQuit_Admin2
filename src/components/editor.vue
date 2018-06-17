@@ -1,7 +1,7 @@
 <template>
     <textarea  placeholder="9999" :id="id" :value="value"></textarea>
-</template>  
-  
+</template>
+
 <script>
 // Import TinyMCE
 //tinymce的配置信息 参考官方文档 https://www.tinymce.com/docs/configure/integration-and-setup/
@@ -9,7 +9,6 @@ import tinymce from "tinymce/tinymce";
 import "tinymce/themes/modern/theme";
 import "tinymce/plugins/paste";
 import "tinymce/plugins/link";
-import "../langs/zh_CN";
 import "../skins/lightgray/skin.min.css";
 const INIT = 0;
 const CHANGED = 2;
@@ -59,7 +58,7 @@ export default {
     tinymce.get(this.id).destroy();
   }
 };
-</script> 
+</script>
 <style>
 #mceu_27{
   display: none;

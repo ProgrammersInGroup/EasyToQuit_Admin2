@@ -6,39 +6,41 @@
       </i-breadcrumb>
       <div class="vue-panel">
         <Form :model="formItem" ref="formItem" :rules="ruleValidate" :label-width="80">
-          <FormItem label="文章标题:" prop="articleTitle">
-            <Input clearable v-model="formItem.articleTitle" placeholder="请输入文章标题"></Input>
+          <FormItem label="文章標題:" prop="articleTitle">
+            <Input clearable v-model="formItem.articleTitle" placeholder="請輸入文章標題"></Input>
           </FormItem>
           <FormItem label="文章作者:" prop="userCode">
-            <Select @on-change="getCategory" placeholder="请选择文章作者" clearable v-model="formItem.userCode">
+            <Input clearable v-model="formItem.userCode" placeholder="請輸入文章作者"></Input>
+            <!-- <Select @on-change="getCategory" placeholder="请选择文章作者" clearable v-model="formItem.userCode">
               <Option :key="x.userCode" v-for="x in userList" :value="x.userCode">{{x.userName}}</Option>
-            </Select>
+            </Select> -->
           </FormItem>
-          <FormItem label="文章分类:" prop="category">
-            <Select not-found-text="该用户还没有文章分类" placeholder="请选择文章分类" clearable v-model="formItem.category" filterable multiple>
+          <FormItem label="文章分類:" prop="category">
+            <Input clearable v-model="formItem.category" placeholder="請輸入文章分類"></Input>
+            <!-- <Select not-found-text="该用户还没有文章分类" placeholder="请选择文章分类" clearable v-model="formItem.category" filterable multiple>
               <Option v-for="item in categoryList" :value="item._id" :key="item._id">{{ item.categoryName }}</Option>
-            </Select>
+            </Select> -->
           </FormItem>
           <FormItem label="文章内容:" prop="content">
             <editor class="editor" :value="formItem.content" v-model="formItem.content" :setting="editorSetting" @input="(content)=> content = content"></editor>
           </FormItem>
           <FormItem label="文章摘要:" prop="abstract">
-            <Input v-model="formItem.abstract" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入文章摘要"></Input>
+            <Input v-model="formItem.abstract" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="請輸入文章摘要"></Input>
           </FormItem>
-          <FormItem label="文章标签:" prop="tags">
+          <FormItem label="文章標籤:" prop="tags">
             <Select clearable v-model="formItem.tags" filterable multiple>
               <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
             </Select>
           </FormItem>
-          <FormItem label="文章状态:" prop="status">
-            <Select placeholder="请选择文章状态" clearable v-model="formItem.status">
-              <Option value="100">发布</Option>
-              <Option value="500">保存草稿</Option>
+          <FormItem label="文章狀態:" prop="status">
+            <Select placeholder="請選擇文章狀態" clearable v-model="formItem.status">
+              <Option value="100">發布</Option>
+              <Option value="500">存成草稿</Option>
             </Select>
           </FormItem>
           <FormItem>
-            <Button size="large" type="primary" class="vue-back-btn" @click="handleSubmit('formItem')" shape="circle">保存</Button>
-            <Button size="large" type="ghost" class="vue-back-btn" @click="clear" shape="circle" style="margin-left: 8px">清空</Button>
+            <Button size="large" type="primary" class="vue-back-btn" @click="handleSubmit('formItem')" shape="circle">儲存</Button>
+            <Button size="large" type="ghost" class="vue-back-btn" @click="clear" shape="circle" style="margin-left: 8px">清除</Button>
           </FormItem>
         </Form>
       </div>
@@ -72,23 +74,23 @@ export default {
       this.breadcrumbTitle = "修改文章";
     } else {
       // 新增用户时提示一下
-      this.breadcrumbTitle = "新增文章";
+      this.breadcrumbTitle = "新增衛教文章";
     }
   },
   data() {
     const validateCategory = (rule, value, callback) => {
       if (!this.formItem.userCode) {
-        callback(new Error("请选择文章作者"));
+        callback(new Error("請輸入文章作者"));
       }
       if (value.length === 0) {
-        callback(new Error("请选择文章分类"));
+        callback(new Error("請輸入文章分類"));
       } else {
         callback();
       }
     };
     const validateTags = (rule, value, callback) => {
       if (value.length === 0) {
-        callback(new Error("请选择文章标签"));
+        callback(new Error("請選擇文章標籤"));
       } else {
         callback();
       }
@@ -102,35 +104,35 @@ export default {
         articleTitle: [
           {
             required: true,
-            message: "请输入文章标题",
+            message: "請輸入文章標題",
             trigger: "blur"
           }
         ],
         platType: [
           {
             required: true,
-            message: "请选择所属平台",
+            message: "請選擇所属平台",
             trigger: "change"
           }
         ],
         status: [
           {
             required: true,
-            message: "请选择文章状态",
+            message: "請選擇文章狀態",
             trigger: "blur"
           }
         ],
         userCode: [
           {
             required: true,
-            message: "请选择文章作者",
+            message: "請輸入文章作者",
             trigger: "blur"
           }
         ],
         abstract: [
           {
             required: true,
-            message: "请选择文章摘要",
+            message: "請輸入文章摘要",
             trigger: "blur"
           }
         ],
@@ -143,15 +145,15 @@ export default {
         ],
         category: [
           {
-            required: true,
-            validator: validateCategory,
-            trigger: "change"
+            required: false,
+            message: "請輸入文章分類",
+            trigger: "blur"
           }
         ],
         content: [
           {
             required: true,
-            message: "请输入文章内容",
+            message: "請輸入文章内容",
             // validator: validateCategory,
             trigger: "change"
           }
@@ -160,34 +162,18 @@ export default {
       cityList: [
         {
           value: "New York",
-          label: "New York"
+          label: "衛教資訊"
         },
         {
           value: "London",
-          label: "London"
-        },
-        {
-          value: "Sydney",
-          label: "Sydney"
-        },
-        {
-          value: "Ottawa",
-          label: "Ottawa"
-        },
-        {
-          value: "Paris",
-          label: "Paris"
-        },
-        {
-          value: "Canberra",
-          label: "Canberra"
+          label: "戒菸撇步"
         }
       ],
       editorSetting: {
         height: 500
       },
       formItem: {
-        category: [],
+        category: "",
         tags: [],
         content: "",
         articleTitle: ""

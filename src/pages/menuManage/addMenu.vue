@@ -1,7 +1,7 @@
 <template>
     <div>
         <i-layout>
-            <i-breadcrumb :t2="breadcrumbTitle">
+            <i-breadcrumb :t3="breadcrumbTitle">
                 <Button class="fr vue-back-btn" @click="$router.go(-1)" shape="circle">返回</Button>
             </i-breadcrumb>
             <div class="vue-panel-desc">
