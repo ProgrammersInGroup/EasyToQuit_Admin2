@@ -8,6 +8,7 @@
         <Row type="flex" justify="center">
           <Col span="12" :md="14" :lg="12" :xs="24" :sm="24">
           <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+           
             <FormItem label="個管師名:" prop="userCode">
               <Input v-if="!$route.query.userCode" v-model="formValidate.userCode" placeholder="請輸入個管師名稱"></Input>
               <label v-if="$route.query.userCode">{{formValidate.userCode}}</label>
@@ -83,7 +84,7 @@ export default {
         refUserRoleCode: [
           {
             required: true,
-            message: "请选择用户类型",
+            message: "請選擇用戶類型",
             trigger: "change"
           }
         ],
@@ -91,14 +92,14 @@ export default {
           {
             type: "string",
             max: 100,
-            message: "备注不能超过100个字",
+            message: "備註不能超過100個字",
             trigger: "blur"
           }
         ],
         status: [
           {
             required: true,
-            message: "请选择用户状态",
+            message: "請選擇用戶狀態",
             trigger: "change"
           }
         ]
@@ -109,10 +110,10 @@ export default {
     if (this.$route.query && this.$route.query.userCode) {
       this.formValidate.userCode = this.$route.query.userCode;
       this.findUserInfo();
-      this.breadcrumbTitle = "修改用户";
+      this.breadcrumbTitle = "修改用戶";
     } else {
       // 新增用户时提示一下
-      this.breadcrumbTitle = "新增用户";
+      this.breadcrumbTitle = "新增用戶";
       this.message();
     }
   },
@@ -129,11 +130,11 @@ export default {
     },
     message() {
       this.$Notice.open({
-        title: "温馨提示",
+        title: "溫馨提示",
         duration: 10,
         render: h => {
           return h("span", {}, [
-            h("span", {}, "新增用户密码为:"),
+            h("span", {}, "新增用戶密碼為新增用戶:"),
             h(
               "span",
               {

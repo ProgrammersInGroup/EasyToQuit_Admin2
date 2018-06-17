@@ -8,48 +8,31 @@
                 <Row type="flex" justify="center">
                     <Col span="12" :md="14" :lg="12" :xs="24" :sm="24">
                     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
-                        <FormItem label="菜单编码:" prop="menuId">
-                            <label v-if="!$route.query.menuId" placeholder="请输入菜单编码">{{formValidate.menuId}}
-                                <a style="margin-left:10px" @click="makeCode">换一个</a>
+                        <FormItem label="編碼:" prop="menuId">
+                            <label v-if="!$route.query.menuId" placeholder="請輸入菜單編碼">{{formValidate.menuId}}
+                                <a style="margin-left:10px" @click="makeCode">換一個</a>
                             </label>
                             <label v-if="$route.query.menuId">{{formValidate.menuId}}</label>
                         </FormItem>
-                        <FormItem label="创建人:" prop="userCode">
-                            <Select v-model="formValidate.userCode" placeholder="请选择创建人">
-                                <Option value="100">前台</Option>
-                                <Option value="200">后台</Option>
-                            </Select>
-                        </FormItem>
-                        <FormItem label="菜单名称:" prop="menuName">
-                            <Input v-model="formValidate.menuName" placeholder="请输入菜单名称"></Input>
-                        </FormItem>
-                        <FormItem label="所属平台:" prop="platType">
-                            <Select v-model="formValidate.platType" placeholder="请选择所属平台">
-                                <Option value="100">前台</Option>
-                                <Option value="200">后台</Option>
-                            </Select>
-                        </FormItem>
-                        <FormItem label="菜单级别:" prop="menuLevel">
-                            <Select v-model="formValidate.menuLevel" placeholder="请选择菜单级别">
-                                <Option value="100">一级</Option>
-                                <Option value="200">二级</Option>
-                            </Select>
-                        </FormItem>
-                        <FormItem label="上级菜单:" prop="pmenuId">
-                            <Select v-model="formValidate.pmenuId" placeholder="请选择上级菜单">
-                                <Option value="100">前台</Option>
-                                <Option value="200">后台</Option>
-                            </Select>
-                        </FormItem>
-                        <FormItem label="菜单描述:" prop="remark">
-                            <Input v-model="formValidate.remark" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入菜单描述"></Input>
-                        </FormItem>
-                        <FormItem label="菜单图标编码:" prop="icon">
-                            <Input v-model="formValidate.icon" placeholder="请输入菜单图标编码"></Input>
-                        </FormItem>
-                        <FormItem label="菜单地址:" prop="url">
-                            <Input v-model="formValidate.url" placeholder="请输入菜单地址"></Input>
-                        </FormItem>
+                        <FormItem label="個管師名:" prop="userCode">
+              <Input v-if="!$route.query.userCode" v-model="formValidate.userCode" placeholder="請輸入個管師名稱"></Input>
+              <label v-if="$route.query.userCode">{{formValidate.userCode}}</label>
+            </FormItem>
+            <FormItem label="電話:" prop="userName">
+              <Input v-model="formValidate.userName" placeholder="請輸入電話"></Input>
+            </FormItem>
+            <FormItem label="生日:" prop="identifyNo">
+              <Input v-model="formValidate.identifyNo" placeholder="請輸入生日"></Input>
+            </FormItem>
+            <FormItem label="性別:" prop="refUserRoleCode">
+              <Select v-model="formValidate.refUserRoleCode" placeholder="請選擇性別">
+                <Option value="USER">男</Option>
+                <Option value="ADMIN">女</Option>
+              </Select>
+            </FormItem>
+            <FormItem label="備註:" prop="desc">
+              <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="請輸入備註"></Input>
+            </FormItem>
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate')">保存</Button>
                             <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">清空</Button>
@@ -122,13 +105,6 @@ export default {
             trigger: "blur"
           }
         ],
-        pmenuId: [
-          {
-            required: true,
-            message: "请选择上级菜单",
-            trigger: "change"
-          }
-        ],
         remark: [
           {
             type: "string",
@@ -144,10 +120,10 @@ export default {
     if (this.$route.query && this.$route.query.menuId) {
       this.formValidate.menuId = this.$route.query.menuId;
       this.findMenuInfo();
-      this.breadcrumbTitle = "修改菜单";
+      this.breadcrumbTitle = "修改菜單";
     } else {
       // 新增菜单时提示一下
-      this.breadcrumbTitle = "新增菜单";
+      this.breadcrumbTitle = "新增菜單";
       this.message();
     }
   },

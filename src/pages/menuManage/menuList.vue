@@ -7,47 +7,44 @@
             <Form :model="formItem" :label-width="80">
                 <Row>
                     <Col :xs="24" :sm="24" :md="8" :lg="8">
-                    <FormItem label="创建日期:">
-                        <DatePicker style="width:100%" v-model="formItem.createTime" format="yyyy-MM-dd" type="daterange" placement="bottom-start" placeholder="请选择日期"></DatePicker>
+                    <FormItem label="創建日期:">
+                        <DatePicker style="width:100%" v-model="formItem.createTime" format="yyyy-MM-dd" type="daterange" placement="bottom-start" placeholder="請選擇日期"></DatePicker>
                     </FormItem>
                     </Col>
                     <Col :xs="24" :sm="24" :md="8" :lg="8">
-                    <FormItem label="菜单名称:">
-                        <Input v-model="formItem.menuName" placeholder="请输入菜单名称" clearable></Input>
+                    <FormItem label="用戶姓名:">
+                        <Input v-model="formItem.menuName" placeholder="請輸入用戶姓名" clearable></Input>
                     </FormItem>
                     </Col>
                     <Col :xs="24" :sm="24" :md="8" :lg="8">
-                    <FormItem label="菜单编码:">
-                        <Input v-model="formItem.menuId" placeholder="请输入菜单编码" clearable></Input>
+                    <FormItem label="電話:">
+                        <Input v-model="formItem.menuId" placeholder="請輸入電話" clearable></Input>
                     </FormItem>
                     </Col>
                     <Col :xs="24" :sm="24" :md="8" :lg="8">
-                    <FormItem label="所属平台:">
-                        <Select v-model="formItem.platType">
-                            <Option value="100">前台</Option>
-                            <Option value="200">后台</Option>
+                    <FormItem label="性別:">
+                        <Select v-model="formItem.platType" placeholder="請選擇" clearable>
+                            <Option value="100">男</Option>
+                            <Option value="200">女</Option>
                         </Select>
                     </FormItem>
                     </Col>
                     <Col :xs="24" :sm="24" :md="8" :lg="8">
-                    <FormItem label="菜单级别:">
-                        <Select v-model="formItem.menuLevel">
-                            <Option value="100">一级</Option>
-                            <Option value="200">二级</Option>
+                    <FormItem label="用戶狀態:">
+                        <Select v-model="formItem.menuLevel" placeholder="請選擇" clearable>
+                            <Option value="100">禁用</Option>
+                            <Option value="200">啟用</Option>
                         </Select>
                     </FormItem>
                     </Col>
                     <Col :xs="24" :sm="24" :md="8" :lg="8">
-                    <FormItem label="创建人:">
-                        <Select v-model="formItem.userCode">
-                            <Option value="100">一级</Option>
-                            <Option value="200">二级</Option>
-                        </Select>
+                    <FormItem label="用戶名:">
+                        <Input v-model="formItem.userCode" placeholder="請輸入用戶姓名" clearable></Input>
                     </FormItem>
                     </Col>
                 </Row>
                 <FormItem>
-                    <Button type="primary" @click="getList" style="width:80px" long shape="circle">查询</Button>
+                    <Button type="primary" @click="getList" style="width:80px" long shape="circle">查詢</Button>
                     <Button type="ghost" style="width:80px;margin-left: 8px" @click="clearForm" shape="circle">清除</Button>
                 </FormItem>
             </Form>
@@ -112,13 +109,13 @@ export default {
       tableData1: [],
       tableColumns1: [
         {
-          title: "序号",
+          title: "序號",
           type: "index",
           width: 60,
           align: "center"
         },
         {
-          title: "创建日期",
+          title: "創建日期",
           width: 150,
           sortable: true,
           key: "createTime",
@@ -131,20 +128,20 @@ export default {
           }
         },
         {
-          title: "菜单编码",
+          title: "病患姓名",
           key: "menuId",
           sortable: true
         },
         {
-          title: "菜单名称",
+          title: "電話",
           key: "menuName"
         },
         {
-          title: "创建人",
+          title: "生日",
           key: "userCode"
         },
         {
-          title: "所属平台",
+          title: "性別",
           key: "platType",
           render: (h, params) => {
             const row = params.row;
@@ -155,7 +152,7 @@ export default {
           }
         },
         {
-          title: "菜单级别",
+          title: "備註",
           key: "menuLevel",
           render: (h, params) => {
             const row = params.row;
@@ -165,27 +162,27 @@ export default {
             return h("span", menuLevel);
           }
         },
-        {
-          title: "操作",
+         {
+           title: "操作",
           width: 180,
-          key: "edit",
+           key: "edit",
           render: (h, params) => {
-            return h("div", [
+           return h("div", [
               h(
-                "Button",
+                 "Button",
                 {
                   props: {
-                    type: "primary",
-                    size: "small"
-                  },
+                 type: "primary",
+                   size: "small"
+                 },
                   style: {
                     marginRight: "5px"
-                  },
-                  on: {
-                    click: () => {
+                 },
+                   on: {
+                   click: () => {
                       this.editMenu(params.row.menuId);
                     }
-                  }
+                 }
                 },
                 "修改"
               ),

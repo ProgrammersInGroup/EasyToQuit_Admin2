@@ -7,39 +7,39 @@
       <Form :model="formItem" :label-width="80">
         <Row>
           <Col :xs="24" :sm="24" :md="8" :lg="8">
-          <FormItem label="创建日期:">
-            <DatePicker style="width:100%" v-model="formItem.createTime" format="yyyy-MM-dd" type="daterange" placement="bottom-start" placeholder="请选择日期"></DatePicker>
+          <FormItem label="創建日期:">
+            <DatePicker style="width:100%" v-model="formItem.createTime" format="yyyy-MM-dd" type="daterange" placement="bottom-start" placeholder="請選擇日期"></DatePicker>
           </FormItem>
           </Col>
           <Col :xs="24" :sm="24" :md="8" :lg="8">
-          <FormItem label="用户姓名:">
-            <Input v-model="formItem.userName" placeholder="请输入用户姓名" clearable></Input>
+          <FormItem label="用戶姓名:">
+            <Input v-model="formItem.userName" placeholder="請輸入用戶姓名" clearable></Input>
           </FormItem>
           </Col>
           <Col :xs="24" :sm="24" :md="8" :lg="8">
-          <FormItem label="身份证号:">
-            <Input v-model="formItem.identifyNo" placeholder="请输入身份证号" clearable></Input>
+          <FormItem label="電話:">
+            <Input v-model="formItem.phonenum" placeholder="請輸入電話" clearable></Input>
           </FormItem>
           </Col>
           <Col :xs="24" :sm="24" :md="8" :lg="8">
-          <FormItem label="用户类型:">
-            <Select v-model="formItem.refUserRoleCode">
-              <Option value="USER">普通用户</Option>
-              <Option value="ADMIN">管理员</Option>
+          <FormItem label="性別:">
+            <Select v-model="formItem.refUserRoleCode" placeholder="請選擇" clearable>
+              <Option value="USER">男</Option>
+              <Option value="ADMIN">女</Option>
             </Select>
           </FormItem>
           </Col>
           <Col :xs="24" :sm="24" :md="8" :lg="8">
-          <FormItem label="用户状态:">
-            <Select v-model="formItem.status">
+          <FormItem label="用戶狀態:">
+            <Select v-model="formItem.status" placeholder="請選擇" clearable>
               <Option value="500">禁用</Option>
-              <Option value="100">启用</Option>
+              <Option value="100">啟用</Option>
             </Select>
           </FormItem>
           </Col>
           <Col :xs="24" :sm="24" :md="8" :lg="8">
           <FormItem label="用户名:">
-            <Input v-model="formItem.userCode" placeholder="请输入用户名" clearable></Input>
+            <Input v-model="formItem.userCode" placeholder="請輸入用戶姓名" clearable></Input>
           </FormItem>
           </Col>
         </Row>
@@ -109,13 +109,13 @@ export default {
       tableData1: [],
       tableColumns1: [
         {
-          title: "序号",
+          title: "序號",
           type: "index",
           width: 60,
           align: "center"
         },
         {
-          title: "创建日期",
+          title: "創建日期",
           width: 150,
           sortable: true,
           key: "createTime",
@@ -128,25 +128,25 @@ export default {
           }
         },
         {
-          title: "用户名",
+          title: "個管師帳號",
           key: "userCode",
           sortable: true
         },
         {
-          title: "用户姓名",
+          title: "個管師姓名",
           key: "userName"
         },
         {
-          title: "手机号码",
+          title: "電話",
           key: "phonenum"
         },
         {
-          title: "身份证号码",
+          title: "生日",
           width: 200,
           key: "identifyNo"
         },
         {
-          title: "用户类型",
+          title: "性別",
           key: "refUserRoleCode",
           render: (h, params) => {
             const row = params.row;
@@ -157,7 +157,7 @@ export default {
           }
         },
         {
-          title: "用户状态",
+          title: "狀態",
           key: "status",
           render: (h, params) => {
             const row = params.row;
@@ -166,7 +166,7 @@ export default {
           }
         },
         {
-          title: "操作",
+          title: "備註",
           width: 180,
           key: "edit",
           render: (h, params) => {
